@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { PetStoreApi } from '../src/lib/api/petstore/PetStoreApi';
+import { PetStoreApi } from '../src/lib/api/PetStoreApi';
 import { components } from '../openapi/generated-types/types';
 
 test('Create a new Pet', async () => {
@@ -86,7 +86,6 @@ test('Retrieve a Pet', async () => {
     // Retrieve the created pet using GET endpoint
     const retrievedPetResponse = await petStoreApi.getPetById(createdPet.id);
     const retrievedPet = await retrievedPetResponse.json();
-    console.log('Retrieved Pet:', retrievedPet);
 
     // Ensure the retrieved pet matches the created pet
     expect(retrievedPet.id).toEqual(createdPet.id);
