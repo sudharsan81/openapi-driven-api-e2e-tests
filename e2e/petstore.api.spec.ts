@@ -56,7 +56,7 @@ test('Create a new Pet', async () => {
   }
 });
 
-test.only('Retrieve a Pet', async () => {
+test('Retrieve a Pet', async () => {
   const baseURL = 'http://localhost:3000/v2';
   const petStoreApi = new PetStoreApi(baseURL);
   await petStoreApi.init();
