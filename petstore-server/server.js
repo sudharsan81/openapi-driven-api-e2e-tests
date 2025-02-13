@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 });
 
 // Load the OpenAPI specification
-const swaggerDocument = YAML.load(path.join(__dirname, '../openapi/specification/petstore-api.yaml'));
+const swaggerDocument = YAML.load(path.join(__dirname, '../openapi/specification/petstore-api-spec.yaml'));
 
 // Serve the OpenAPI documentation using Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

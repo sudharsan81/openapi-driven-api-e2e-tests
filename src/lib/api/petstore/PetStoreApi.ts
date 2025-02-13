@@ -1,6 +1,6 @@
 // src/petstore/PetStoreApi.ts
 import { APIContext } from '../request/context';
-import { components, operations } from '../../../../openapi/generated-types/types';
+import { components, operations } from '../../../../openapi/generated/petstore-types';
 
 export class PetStoreApi {
     private apiContext: APIContext;

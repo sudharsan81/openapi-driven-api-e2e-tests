@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { PetStoreApi } from '../src/lib/api/petstore/PetStoreApi';
+import { components } from '../openapi/generated/petstore-types';
+
 import * as fs from 'fs';
 import * as path from 'path';
 import chai from 'chai';
@@ -15,10 +17,10 @@ test('Create a new Pet', async () => {
 
   try {
     // Create a new pet
-    const newPet = {
+    const newPet: components['schemas']['Pet'] = {
       id: 0,
       name: 'Test Pet',
-      status: 'available', // Ensure this is one of the expected values
+      status: 'available',
       category: {
           id: 0,
           name: 'Test Category',
@@ -44,7 +46,7 @@ test('Create a new Pet', async () => {
     expect(createdPetResponseBody.id).not.toEqual(0);
 
     // Read the JSON schema file
-    const schemaFilePath = path.resolve(__dirname, '../openapi/generated-schemas/petstore-api.json');
+    const schemaFilePath = path.resolve(__dirname, '../openapi/generated/petstore-api-spec.json');
     const schemaFileContent = fs.readFileSync(schemaFilePath, 'utf8');
     const petSchema = JSON.parse(schemaFileContent);
 
@@ -93,13 +95,21 @@ test('Retrieve a Pet', async () => {
 
     // Retrieve the created pet using GET endpoint
     const retrievedPetResponse = await petStoreApi.getPetById(createdPet.id);
+    const retrievedPetResponseBody = await retrievedPetResponse.json();
     const retrievedPet = await retrievedPetResponse.json();
-    console.log('Retrieved Pet:', retrievedPet);
 
     // Ensure the retrieved pet matches the created pet
     expect(retrievedPet.id).toEqual(createdPet.id);
     expect(retrievedPet.name).toEqual(createdPet.name);
     expect(retrievedPet.status).toEqual(createdPet.status);
+
+    // Read the JSON schema file
+    const schemaFilePath = path.resolve(__dirname, '../openapi/generated/petstore-api-spec.json');
+    const schemaFileContent = fs.readFileSync(schemaFilePath, 'utf8');
+    const petSchema = JSON.parse(schemaFileContent);
+
+    // Validate the schema of the created pet response body
+    chaiExpect(retrievedPetResponseBody).to.be.jsonSchema(petSchema);
   }
   finally {
     await petStoreApi.close();

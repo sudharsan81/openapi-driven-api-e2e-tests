@@ -7,4 +7,7 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 
-# openapi
+# generated openapi artifacts
+/openapi/
+
+# aob
