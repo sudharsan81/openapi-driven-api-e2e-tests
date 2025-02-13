@@ -6,7 +6,9 @@
     "node": "^23.6.1"
   },
   "scripts": {
-    "start": "node ./petstore-server/server.js"
+    "start": "node ./petstore-server/server.js",
+    "prettify": "npx prettier --write .",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +18,15 @@
     "@playwright/test": "^1.50.1",
     "chai": "^4.3.7",
     "chai-json-schema": "^1.5.1",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7"
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,md}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
