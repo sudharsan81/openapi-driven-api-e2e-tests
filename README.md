@@ -41,6 +41,8 @@ mkdir -p ./openapi/generated/ && swagger-cli bundle ./openapi/specification/pets
 4. Start local pet store api server
 
 ```bash
+npm install
+
 cd petstore-server
 
 node server.js
