@@ -6,9 +6,9 @@ For demo purpose, we download and use latest [Swagger's Petstore Open API specif
 
 ## Pre-requisites
 
-- node, version <= 23.6.1
-- npm, version <= 10.9.2
-- curl, version <=7.54.0
+- node, version >= 23.6.1
+- npm, version >= 10.9.2
+- curl, version >=7.54.0
 
 ## Preparation
 
