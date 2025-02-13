@@ -22,18 +22,18 @@ test('Create a new Pet', async () => {
       name: 'Test Pet',
       status: 'available',
       category: {
-          id: 0,
-          name: 'Test Category',
+        id: 0,
+        name: 'Test Category',
       },
       tags: [
-          {
-              id: 0,
-              name: 'Test Tag',
-          },
+        {
+          id: 0,
+          name: 'Test Tag',
+        },
       ],
       photoUrls: [
-          'http://example.com/photo1.jpg',
-          'http://example.com/photo2.jpg'
+        'http://example.com/photo1.jpg',
+        'http://example.com/photo2.jpg',
       ],
     };
 
@@ -46,14 +46,16 @@ test('Create a new Pet', async () => {
     expect(createdPetResponseBody.id).not.toEqual(0);
 
     // Read the JSON schema file
-    const schemaFilePath = path.resolve(__dirname, '../openapi/generated/petstore-api-spec.json');
+    const schemaFilePath = path.resolve(
+      __dirname,
+      '../openapi/generated/petstore-api-spec.json',
+    );
     const schemaFileContent = fs.readFileSync(schemaFilePath, 'utf8');
     const petSchema = JSON.parse(schemaFileContent);
 
     // Validate the schema of the created pet response body
     chaiExpect(createdPetResponseBody).to.be.jsonSchema(petSchema);
-  }
-  finally {
+  } finally {
     await petStoreApi.close();
   }
 });
@@ -70,18 +72,18 @@ test('Retrieve a Pet', async () => {
       name: 'Pet',
       status: 'available',
       category: {
-          id: 0,
-          name: 'Test Category',
+        id: 0,
+        name: 'Test Category',
       },
       tags: [
-          {
-              id: 0,
-              name: 'Test Tag',
-          },
+        {
+          id: 0,
+          name: 'Test Tag',
+        },
       ],
       photoUrls: [
-          'http://example.com/photo1.jpg',
-          'http://example.com/photo2.jpg'
+        'http://example.com/photo1.jpg',
+        'http://example.com/photo2.jpg',
       ],
     };
 
@@ -104,14 +106,16 @@ test('Retrieve a Pet', async () => {
     expect(retrievedPet.status).toEqual(createdPet.status);
 
     // Read the JSON schema file
-    const schemaFilePath = path.resolve(__dirname, '../openapi/generated/petstore-api-spec.json');
+    const schemaFilePath = path.resolve(
+      __dirname,
+      '../openapi/generated/petstore-api-spec.json',
+    );
     const schemaFileContent = fs.readFileSync(schemaFilePath, 'utf8');
     const petSchema = JSON.parse(schemaFileContent);
 
     // Validate the schema of the created pet response body
     chaiExpect(retrievedPetResponseBody).to.be.jsonSchema(petSchema);
-  }
-  finally {
+  } finally {
     await petStoreApi.close();
   }
 });
